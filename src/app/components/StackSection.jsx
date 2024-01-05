@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const AnimatedNumbers = dynamic(
   () => {
@@ -12,7 +13,7 @@ const AnimatedNumbers = dynamic(
 const stackList = [
   {
     metric: "HTML5",
-    value: "100",
+    value: "",
   },
   {
     metric: "CSS3",
@@ -20,6 +21,10 @@ const stackList = [
   },
   {
     metric: "Javascript",
+    icon: "/images/stack/JS.png",
+  },
+  {
+    metric: "Typescript",
     value: "100",
   },
   {
@@ -52,25 +57,15 @@ const StackSection = () => {
           return (
             <div
               key={index}
-              className="flex flex-col items-center justify-center mx-4 my-4 sm:my-0"
+              className="flex flex-col gap-3 items-center justify-center mx-4 my-4 sm:my-0"
             >
-              <h2 className="text-white text-4xl font-bold flex flex-row">
-                {stack.prefix}
-                <AnimatedNumbers
-                  includeComma
-                  animateToNumber={parseInt(stack.value)}
-                  locale="en-US"
-                  className="text-white text-4xl font-bold"
-                  configs={(_, index) => {
-                    return {
-                      mass: 1,
-                      friction: 100,
-                      tensions: 140 * (index + 1),
-                    };
-                  }}
-                />
-                {stack.postfix}
-              </h2>
+              <Image
+                src={stack.icon}
+                alt={stack.metric}
+                width={60}
+                height={30}
+              />
+
               <p className="text-[#ADB7BE] text-base">{stack.metric}</p>
             </div>
           );
@@ -81,3 +76,18 @@ const StackSection = () => {
 };
 
 export default StackSection;
+
+/* 
+<AnimatedNumbers
+includeComma
+animateToNumber={parseInt(stack.value)}
+locale="en-US"
+className="text-white text-4xl font-bold"
+configs={(_, index) => {
+  return {
+    mass: 1,
+    friction: 100,
+    tensions: 140 * (index + 1),
+  };
+}}
+/> */
